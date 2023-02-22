@@ -1,11 +1,14 @@
 function handleClick() {
-    makeSound(this.innerHTML);
-    buttonAnimation(this.innerHTML);
+    var buttonClicked = this.innerHTML;
+    makeSound(buttonClicked);
+    buttonAnimation(buttonClicked);
+    setTimeout(function(){return buttonAnimation(buttonClicked)}, 100);
 }
 
 function handleKeyDown(element) {
     makeSound(element.key);
     buttonAnimation(element.key);
+    setTimeout(function(){return buttonAnimation(element.key)}, 100);
 }
 
 function makeSound(key) {
@@ -40,11 +43,9 @@ function makeSound(key) {
     drum.play();
 }
 function buttonAnimation(currentKey) {
-    document.querySelector("."+currentKey).classList.toggle("pressed");
-    
-    
+    document.querySelector("."+currentKey).classList.toggle("pressed"); 
 }
 
-document.querySelectorAll(".drum").forEach(el => el.addEventListener("click", handleClick));
+document.querySelectorAll(".drum").forEach(el => el.addEventListener("mousedown", handleClick));
 
 document.addEventListener("keydown", handleKeyDown);
