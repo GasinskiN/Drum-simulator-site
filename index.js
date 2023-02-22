@@ -1,5 +1,15 @@
 function handleClick() {
-    switch (this.innerHTML) {
+    makeSound(this.innerHTML);
+    buttonAnimation(this.innerHTML);
+}
+
+function handleKeyDown(element) {
+    makeSound(element.key);
+    buttonAnimation(element.key);
+}
+
+function makeSound(key) {
+    switch (key) {
         case "a":
             var drum = new Audio("sounds/tom-1.mp3");
             break;
@@ -22,17 +32,19 @@ function handleClick() {
             var drum = new Audio("sounds/snare.mp3")
             break;
         default:
-            console.log("There was a button press wiht class drum" +
+            console.log("There was a button press" +
              "that didn't have any of the assigned letters");
+             return 
             break;
     }
     drum.play();
 }
+function buttonAnimation(currentKey) {
+    document.querySelector("."+currentKey).classList.toggle("pressed");
+    
+    
+}
 
 document.querySelectorAll(".drum").forEach(el => el.addEventListener("click", handleClick));
 
-
-
-
-// var drum = new Audio("sounds/crash.mp3");
-// drum.play();
+document.addEventListener("keydown", handleKeyDown);
